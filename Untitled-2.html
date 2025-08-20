@@ -1,0 +1,124 @@
+html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Hope Family Charity</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #fff; color: #333; }
+
+    header {
+      background: #f1c40f;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 { margin-bottom: 10px; }
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #000;
+      font-weight: 600;
+    }
+
+    .hero {
+      background: url('https://via.placeholder.com/1200x400') no-repeat center center/cover;
+      color: white;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+      background: rgba(0,0,0,0.5);
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
+
+    section {
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    #donate input, #donate button {
+      padding: 10px;
+      margin: 10px 0;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .hero h2 {
+        font-size: 1.5rem;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>The Hope Family Charity</h1>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#donate">Donate</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <h2>Spreading Smiles and Hope to Others</h2>
+</div>
+
+<section id="about">
+  <h2>About Us</h2>
+  <p>The Hope Family Charity is dedicated to uplifting underprivileged communities through support, education, and empowerment.</p>
+</section>
+
+<section id="projects">
+  <h2>Our Projects</h2>
+  <ul>
+    <li>Feeding programs for children</li>
+    <li>School supplies donations</li>
+    <li>Supporting the disabled</li>
+    <li>Support for single mothers</li>
+  </ul>
+</section>
+
+<section id="donate">
+  <h2>Support Our Mission</h2>
+  <form>
+    <input type="text" placeholder="Your Name" required><br/>
+    <input type="email" placeholder="Your Email" required><br/>
+    <input type="number" placeholder="Phone number" required><br/>
+    <input type="number" placeholder="Amount (TSh/USD)" required><br/>
+    <button type="submit" onclick="alert('Thank you for your support!')">Donate</button>
+  </form>
+</section>
+
+<section id="contact">
+  <h2>Contact Us</h2>
+  <p>Email: hopefamilycharity@gmail.com</p>
+  <p>Phone: +255 758 572 489 and +255 750 961 280</p>
+  <p>Location: Dar es Salaam, Tanzania</p>
+</section>
+
+<footer>
+  &copy; 2025 The Hope Family Charity. All rights reserved.
+</footer>
+
+</body>
+</html>
