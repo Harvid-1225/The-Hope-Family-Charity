@@ -2,162 +2,300 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>The Hope Family Charity</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Segoe UI', sans-serif; background: #fff; color: #333; }
-
-    header {
-      background: #f1c40f;
-      padding: 20px;
+    body {
+      font-family: 'Times New Roman', Times, serif;
+      background-color: hsl(56, 94%, 50%);
+      color: #2e3d2f;
+      margin: 0;
+      padding: 2;
       text-align: center;
     }
-    header h1 { margin-bottom: 10px; }
-    nav a {
-      margin: 0 15px;
-      text-decoration: none;
-      color: #000;
-      font-weight: 600;
+    .container { padding: 30px; }
+    img.profile {
+      width: 150px;
+      border-radius: 12px;
+      border: 3px solid #28a745;
+      margin-bottom: 20px;
     }
-
-    .hero {
-      background: url('https://via.placeholder.com/1200x400') no-repeat center center/cover;
-      color: white;
-      height: 300px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
+    form {
+      background: #6db0ee;
+      padding: 50px;
+      border-radius: 25px;
+      width: 320px;
+      margin: 0 auto;
     }
-
-    .hero h2 {
-      font-size: 2.5rem;
-      background: rgba(0,0,0,0.5);
-      padding: 10px 20px;
-      border-radius: 10px;
-    }
-
-    section {
-      padding: 40px 20px;
-      max-width: 900px;
-      margin: auto;
-    }
-
-    #donate input, #donate button {
+    input, button, select {
+      width: 90%;
       padding: 10px;
       margin: 10px 0;
-      width: 100%;
-      max-width: 400px;
+      border: 1;
+      border-radius: 5px;
     }
-
-    footer {
-      background: #222;
+    button {
+      background: #28a745;
       color: white;
-      text-align: center;
-      padding: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
     }
-
-    @media (max-width: 600px) {
-      .hero h2 {
-        font-size: 1.5rem;
-        padding: 10px;
-      }
+    button:hover { background-color: #218838; }
+    nav {
+      background: #28a745;
+      padding: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    nav a {
+      color: white;
+      margin: 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover { color: #d4f5d7; }
+    .section { display: none; }
+    .section.active { display: block; margin-top: 30px; }
+    /* Event gallery */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .gallery-item { position: relative; }
+    .gallery-item a.download {
+      display: block;
+      margin-top: 8px;
+      padding: 5px;
+      background: #28a745;
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+    .gallery-item a.download:hover { background: #1d6b34; }
+    .upload-area {
+      margin: 20px auto;
+      padding: 15px;
+      border: 2px dashed #28a745;
+      border-radius: 10px;
+      width: 70%;
     }
   </style>
 </head>
 <body>
-
-<header>
-  <h1>The Hope Family Charity</h1>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#donate">Donate</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
-
-<div class="hero">
-  <h2>Spreading Smiles and Hope to Others</h2>
+<!-- LOGIN PAGE -->
+<div id="loginPage" class="container">
+  <img src="logo.png" alt="Hope Family Charity Logo" style="width: 100px; height: auto; display: block; margin: 0 auto;">
+  <h2>The Hope Family Charity</h2>
+  <form id="loginForm" class="auth-form active">
+    <input type="text" id="loginUsername" placeholder="Username" data-en="Username" data-sw="Jina la Mtumiaji"/>
+    <input type="password" id="loginPassword" placeholder="Password" data-en="Password" data-sw="Nenosiri"/>
+    <button type="submit" data-en="Login" data-sw="Ingia">Login</button>
+    <div class="auth-link" onclick="showRegisterForm()" data-en="Register if new" data-sw="Jisajili ikiwa mpya">
+      Register if new
+    </div>
+    <!-- Language Selector -->
+    <label for="langSelect"><small data-en="Choose Language:" data-sw="Chagua Lugha:">Choose Language:</small></label>
+    <select id="langSelect" onchange="changeLanguage()">
+      <option value="en">English</option>
+      <option value="sw">Kiswahili</option>
+    </select>
+  </form>
 </div>
 
-<section id="about">
-  <h2>About Us</h2>
-  <p>The Hope Family Charity is dedicated to uplifting underprivileged communities through support, education, and empowerment.</p>
-</section>
+<!-- HOMEPAGE -->
+<div id="homepage" class="container" style="display:none;">
+  <nav>
+    <a onclick="showSection('about')" data-en="About Us" data-sw="Kuhusu Sisi">About Us</a>
+    <a onclick="showSection('founders')" data-en="Our Founders" data-sw="Waasisi Wetu">Our Founders</a>
+    <a onclick="showSection('programs')" data-en="Programs" data-sw="Miradi">Programs</a>
+    <a onclick="showSection('donate')" data-en="Donate" data-sw="Changia">Donate</a>
+    <a onclick="showSection('volunteer')" data-en="Volunteer" data-sw="Jitolee">Volunteer</a>
+    <a onclick="showSection('impact')" data-en="Impact" data-sw="Mchango">Impact</a>
+    <a onclick="showSection('events')" data-en="Events" data-sw="Matukio">Events</a>
+    <a onclick="showSection('contact')" data-en="Contact" data-sw="Wasiliana">Contact</a>
+    <a onclick="logout()" data-en="Logout" data-sw="Toka">Logout</a>
+  </nav>
 
-<section id="projects">
-  <h2>Our Projects</h2>
-  <ul>
-    <li>Feeding programs for children</li>
-    <li>School supplies donations</li>
-    <li>Supporting the disabled</li>
-    <li>Support for single mothers</li>
-  </ul>
-</section>
+  <!-- ABOUT US -->
+  <div id="about" class="section active">
+    <h2 data-en="About Us" data-sw="Kuhusu Sisi">About Us</h2>
+    <p data-en="The Hope Family Charity was founded in 2024 with a heartfelt mission to bring hope, care, and support to vulnerable groups within the community—especially orphans and children in need. The initiative began as a small community effort, led by compassionate youth determined to make a difference despite having limited resources.
 
-<section id="donate">
-  <h2>Support Our Mission</h2>
-  <form>
-    <input type="text" placeholder="Your Name" required><br/>
-    <input type="email" placeholder="Your Email" required><br/>
-    <input type="number" placeholder="Phone number" required><br/>
-    <input type="number" placeholder="Amount (TSh/USD)" required><br/>
-    <button type="submit" onclick="alert('Thank you for your support!')">Donate</button>
-  </form>
-</section>
-<!DOCTYPE html>
-<html lang="sw">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hope Family Charity</title>
-  <style>
-    body { font-family: Arial, sans-serif; padding: 20px; line-height: 1.6; background-color: #f9f9f9; }
-    h1, h2 { color: #b8860b; }
-    .donate-section, .about, .contact { margin-bottom: 40px; background: #fff; padding: 20px; border-radius: 8px; }
-    .donate-button { background-color: gold; color: black; padding: 10px 20px; border: none; cursor: pointer; font-size: 16px; border-radius: 5px; }
-  </style>
-</head>
-<body>
+What started with simple acts of kindness—like providing meals, clothing, and school supplies—grew into a more organized movement. Driven by love, empathy, and commitment to social change, the founders began organizing outreach events, fundraising, and awareness campaigns to expand their impact.
 
-  <h1>Karibu Hope Family Charity</h1>
+In just a short time, The Hope Family Charity became a symbol of unity and compassion, drawing in volunteers, well-wishers, and partners who shared the same vision. Today, the charity continues to grow steadily, empowering the community to care for one another and nurturing a generation of youth who believe in giving hope where it's needed most." 
+       data-sw="The Hope Family Charity ilianzishwa rasmi mwaka 2024 kwa lengo kuu la kuleta tumaini, upendo, na msaada kwa makundi yenye uhitaji mkubwa katika jamii, hasa watoto yatima na wale wanaoishi katika mazingira magumu.
 
-  <div class="about">
-    <h2>Kuhusu Mradi Wetu</h2>
-    <p>
-      Hope Family Charity ni taasisi isiyo ya kiserikali inayojihusisha na kuwasaidia watu wenye ulemavu, yatima na familia zenye uhitaji mkubwa. 
-      Tunatoa misaada ya chakula, mavazi, elimu, na huduma za afya.
+Msingi wa taasisi hii ulijengwa kupitia juhudi ndogo ndogo za vijana walioguswa na hali za maisha ya wengine. Wakiwa na rasilimali chache lakini mioyo yenye huruma, walijitolea kuwasaidia wahitaji kupitia utoaji wa chakula, nguo, vifaa vya shule, na msaada wa kisaikolojia.
+
+Juhudi hizi ndogo zilikua hatua kwa hatua hadi kuwa harakati ya maana ya kijamii. Kupitia michango, kampeni za uhamasishaji, na ushirikiano na watu wenye nia njema, The Hope Family Charity ilianza kujijenga na kupanua huduma zake.
+
+Leo, The Hope Family Charity imekuwa nembo ya mshikamano na upendo katika jamii. Inatoa fursa kwa vijana kushiriki katika mabadiliko chanya, na kuhamasisha kizazi kipya kuamini kuwa tumaini linaweza kurejeshwa hata mahali palipojaa maumivu">
+     The Hope Family Charity was founded in 2024 with a heartfelt mission to bring hope, care, and support to vulnerable groups within the community—especially orphans and children in need. The initiative began as a small community effort, led by compassionate youth determined to make a difference despite having limited resources.
+
+What started with simple acts of kindness—like providing meals, clothing, and school supplies—grew into a more organized movement. Driven by love, empathy, and commitment to social change, the founders began organizing outreach events, fundraising, and awareness campaigns to expand their impact.
+
+In just a short time, The Hope Family Charity became a symbol of unity and compassion, drawing in volunteers, well-wishers, and partners who shared the same vision. Today, the charity continues to grow steadily, empowering the community to care for one another and nurturing a generation of youth who believe in giving hope where it's needed most.
+      </p>
+  </div>
+
+  <!-- FOUNDERS -->
+  <div id="founders" class="section">
+    <h2 data-en="Our Founders" data-sw="Waasisi Wetu">Our Founders</h2>
+    <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:40px; margin-top:20px;">
+      <div style="max-width:250px;">
+        <img src="emmanuel.jpg" alt="Emmanuel Julius Juma" style="width:100%; border-radius:12px; border:3px solid #28a745;">
+        <h3>Emmanuel Julius Juma</h3>
+        <p data-en="Founder of The Hope Family Charity, visionary leader with a passion for empowering communities." 
+           data-sw="Mwanzilishi wa The Hope Family Charity, kiongozi mwenye maono na ari ya kuwawezesha jamii.">
+           Founder of The Hope Family Charity...
+        </p>
+      </div>
+      <div style="max-width:250px;">
+        <img src="joshua.jpg" alt="Joshua Masumbuko Ponela" style="width:100%; border-radius:12px; border:3px solid #28a745;">
+        <h3>Joshua Masumbuko Ponela</h3>
+        <p data-en="Co-founder and Assistant, dedicated to supporting humanitarian work and community development." 
+           data-sw="Mwanzilishi Msaidizi, mwenye kujitolea kusaidia kazi za kibinadamu na maendeleo ya jamii.">
+           Co-founder and Assistant...
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROGRAMS -->
+  <div id="programs" class="section">
+    <h2 data-en="Our Programs" data-sw="Miradi Yetu">Our Programs</h2>
+    <ul>
+      <li data-en="📚 Education Support for Children" data-sw="📚 Msaada wa Elimu kwa Watoto">📚 Education Support for Children</li>
+      <li data-en="🍲 Food Aid to Families in Need" data-sw="🍲 Msaada wa Chakula kwa Familia">🍲 Food Aid to Families in Need</li>
+      <li data-en="🏥 Medical Support & Health Camps" data-sw="🏥 Msaada wa Afya & Kambi za Matibabu">🏥 Medical Support & Health Camps</li>
+      <li data-en="💡 Community Development Projects" data-sw="💡 Miradi ya Maendeleo ya Jamii">💡 Community Development Projects</li>
+    </ul>
+  </div>
+
+  <!-- DONATE -->
+  <div id="donate" class="section">
+    <h2 data-en="Donate" data-sw="Changia">Donate</h2>
+    <p data-en="Your donations bring hope to those in need. Support us via Mobile Money or Bank Transfer." 
+       data-sw="Michango yako inaleta matumaini kwa wanaohitaji. Tusaidie kupitia M-Pesa au Benki.">
+       Your donations bring hope...
+    </p>
+    <p><strong>Pay by M-Pesa:</strong> 36988393 (Emmanuel Julius JUma)</p>
+    <p><strong>TigoPesa:</strong> +255 678 572 489 (Emmanuel Julius Juma)</p>
+  </div>
+
+  <!-- VOLUNTEER -->
+  <div id="volunteer" class="section">
+    <h2 data-en="Volunteer With Us" data-sw="Jitolee Nasi">Volunteer With Us</h2>
+    <p data-en="Join our team of volunteers and make a difference in your community." 
+       data-sw="Jiunge na timu ya wajitoleaji na ufanye mabadiliko katika jamii yako.">
+       Join our team...
+    </p>
+    <button data-en="Sign Up as Volunteer" data-sw="Jisajili kama Mjitoleaji">Sign Up as Volunteer</button>
+  </div>
+
+  <!-- IMPACT -->
+  <div id="impact" class="section">
+    <h2 data-en="Our Impact" data-sw="Mchango Wetu">Our Impact</h2>
+    <p data-en="🌍 Over 5,000 children supported with school supplies.<br>🍲 More than 10,000 meals distributed.<br>🏥 1,500 patients treated in free health camps."
+       data-sw="🌍 Zaidi ya watoto 5,000 wamesaidiwa vifaa vya shule.<br>🍲 Zaidi ya milo 10,000 imesambazwa.<br>🏥 Wagonjwa 1,500 walitibiwa kwenye kambi za afya bure.">
+       🌍 Over 5,000 children supported...
     </p>
   </div>
 
-  <div class="donate-section">
-    <h2>Changia Sasa</h2>
-    <p>Unapochangia, unagusa maisha ya mtu mwenye uhitaji. Tuma mchango wako kupitia njia zifuatazo:</p>
-    <ul>
-<section id="donate">
-     <h2>Changia Kusaidia Watu wenye mahitaji maalumu</h2>
-     <p>Tuma mchango wako kwa:</p>
-     <ul>
-       <li><strong>M-Pesa (Lipa kwa simu):</strong> 36988393 (Jina: Emmanuel Julius Juma)</li>
-       <li><strong>TigoPesa:</strong> 0678572489</li>
-       <li><strong>Email ya mawasiliano:</strong> hopefamilycharity@gmail.com</li>
-     </ul>
-   </section>
-   <section id="contact">
-  <h2>Contact Us</h2>
-  <p>Email: hopefamilycharity@gmail.com</p>
-  <p>Phone: +255 758 572 489</p>
-  <p>Phone: +255 750 961 280</p>
-  <p>WhatsApp no: +255 758 572 489</p>
-  <p>Location: Dar es Salaam, Tanzania</p>
-</section>
-<footer>
-  &copy; 2025 The Hope Family Charity. All rights reserved.
-</footer>
+  <!-- EVENTS -->
+  <div id="events" class="section">
+    <h2 data-en="Charity Events & Gallery" data-sw="Matukio ya Hisani & Picha">Charity Events & Gallery</h2>
+    <p data-en="Photos and videos from our past charity events:" data-sw="Picha na video kutoka matukio yetu ya zamani ya hisani:">
+      Photos and videos from our past charity events:
+    </p>
+    <div class="upload-area">
+      <h3 data-en="📤 Upload New Event Media (Admin)" data-sw="📤 Pakia Picha/Video Mpya (Admin)">
+        📤 Upload New Event Media (Admin)
+      </h3>
+      <input type="file" id="mediaInput" multiple accept="image/*,video/*" />
+      <button onclick="uploadMedia()" data-en="Upload" data-sw="Pakia">Upload</button>
+    </div>
+    <div class="gallery" id="eventGallery">
+      <div class="gallery-item">
+        <img src="https://placekitten.com/400/250" alt="Event Photo 1" />
+        <a href="https://placekitten.com/400/250" download class="download" data-en="Download" data-sw="Pakua">Download</a>
+      </div>
+      <div class="gallery-item">
+        <video controls>
+          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+        </video>
+        <a href="https://www.w3schools.com/html/mov_bbb.mp4" download class="download" data-en="Download Video" data-sw="Pakua Video">Download Video</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div id="contact" class="section">
+    <h2 data-en="Contact Us" data-sw="Wasiliana Nasi">Contact Us</h2>
+    <p>Email: info@hopecharity.org</p>
+    <p>Phone: +255 758 572 489 and +255 750 961 280</p>
+    <p data-en="Address: Dar es Salaam, Tanzania" data-sw="Anwani: Dar es Salaam, Tanzania">Address: Dar es Salaam, Tanzania</p>
+  </div>
+</div>
+
+<script>
+  function showRegisterForm() {
+    alert("Registration for volunteers/donors coming soon!");
+  }
+  function logout() {
+    document.getElementById("homepage").style.display = "none";
+    document.getElementById("loginPage").style.display = "block";
+  }
+  function showSection(id) {
+    document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+  }
+  document.getElementById("loginForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    document.getElementById("loginPage").style.display = "none";
+    document.getElementById("homepage").style.display = "block";
+  });
+
+  // Upload event media
+  function uploadMedia() {
+    const input = document.getElementById("mediaInput");
+    const gallery = document.getElementById("eventGallery");
+    for (let file of input.files) {
+      let reader = new FileReader();
+      reader.onload = function(e) {
+        let wrapper = document.createElement("div");
+        wrapper.classList.add("gallery-item");
+        if (file.type.startsWith("image/")) {
+          wrapper.innerHTML = `<img src="${e.target.result}" alt="Uploaded Image"/>
+            <a href="${e.target.result}" download class="download">Download</a>`;
+        } else if (file.type.startsWith("video/")) {
+          wrapper.innerHTML = `<video controls><source src="${e.target.result}" type="${file.type}"></video>
+            <a href="${e.target.result}" download class="download">Download Video</a>`;
+        }
+        gallery.appendChild(wrapper);
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  // Language change
+  function changeLanguage() {
+    let lang = document.getElementById("langSelect").value;
+    document.querySelectorAll("[data-en]").forEach(el => {
+      if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
+        el.placeholder = el.getAttribute("data-" + lang);
+      } else if (el.tagName === "BUTTON" || el.tagName === "A" || el.tagName === "DIV" || el.tagName === "SMALL") {
+        el.textContent = el.getAttribute("data-" + lang);
+      } else {
+        el.innerHTML = el.getAttribute("data-" + lang);
+      }
+    });
+  }
+</script>
 </body>
 </html>
-
-
-
